@@ -1,4 +1,6 @@
 <?php  
+ob_start();
+session_start();  
 include 'baglan.php';
 if(isset($_POST['genel_ayar'])){
    
@@ -152,7 +154,15 @@ if(isset($_POST['api_ayar'])){
      'kullanici_password'=>$password,
      'kullanici_yetki'=>5
    ]); 
-    $say=$select->rowCount();
-     
+   $say=$select->rowCount();
+    if($say==1){
+      header("Location:../production/index.php");
+      $_SESSION['kullanici_mail']=$mail;
+      exit;
+    } 
+    else{
+    header("Location:../production/login.php?durum=no");
+    exit;
+    }
   }
 ?>

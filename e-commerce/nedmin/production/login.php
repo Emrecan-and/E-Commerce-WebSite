@@ -100,7 +100,7 @@ small {
 }
    </style>
 </head>
-<body>
+<body> 
 <h2>Götür|Company</h2>
   <div class="outer-box">
     <div class="login-box">
@@ -112,6 +112,13 @@ small {
 
       <input type="submit" id="btn-login" name="admingiriş" value="Log In">
       </form> 
+      <?php 
+      if(isset($_GET['durum'])){
+        if($_GET['durum']=="no"){
+             echo "<h6>USER COULDN'T FOUND!!</h6>";
+        }
+      }      
+      ?>
     </center>
     </div>
   </div>

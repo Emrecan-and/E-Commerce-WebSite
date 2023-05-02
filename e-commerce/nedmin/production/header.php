@@ -1,5 +1,7 @@
 <?php   
 include'../netting/baglan.php';
+ob_start();
+session_start();
 ?>
 <?php   
 $select=$db->prepare("SELECT * FROM ayar WHERE ayar_id=:ayar_id");
@@ -7,6 +9,18 @@ $select->execute([
     'ayar_id'=>1
   ]);
  $ayarcek=$select->fetch(PDO::FETCH_ASSOC); 
+?>
+<?php  
+   $kullancı=$db->prepare("SELECT * FROM kullanici WHERE kullanici_mail=:mail");
+   $kullancı->execute([
+       'mail'=>$_SESSION['kullanici_mail']
+     ]);
+    $say=$kullancı->rowCount();
+    $kullanicicek=$kullancı->fetch(PDO::FETCH_ASSOC); 
+    if($say==0){
+        header("Location:login.php?durum=izinsiz");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +70,7 @@ $select->execute([
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Emrecan Erkuş</h2>
+                <h2><?php echo $kullanicicek['kullanici_adsoyad'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -70,6 +84,7 @@ $select->execute([
                 <ul class="nav side-menu">
                 <li><a href="index.php"><i class="fa fa-home"></i> Home Page </a></li>
                 <li><a href="hakkımızda.php"><i class="fa fa-info"></i> About Us  </a></li>
+                <li><a href="kullanıcı.php"><i class="fa fa-user"></i> Users </a></li>
                   <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="genel-ayar.php">General Settings</a></li>
@@ -114,19 +129,13 @@ $select->execute([
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $kullanicicek['kullanici_adsoyad'];?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+    
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Safety Log Out</a></li>
                   </ul>
                 </li>
 

@@ -46,7 +46,16 @@
                     <br />
                     <form action="../netting/işlem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                      <div class="form-group">
+                         <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID<span class="required">*</span>
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                           <input type="text" id="first-name" name="kullanici_id"value="<?php echo $kullanicicek['kullanici_id'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                         </div>
+                      </div>
+
+
+                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">NATIONAL ID<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -74,8 +83,10 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User Status <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?php   //!!!OPTİONS GELİCEK BURADAN DEVAM ET BURADA KALDIN!!!!  
-                          ?>
+                        <select name="kullanici_durum" id="heard" class="form-control" required>
+                          <option value="1"<?php echo $kullanicicek['kullanici_durum']=='1'?  'selected=""':''; ?>>Active</option>
+                          <option value="0"<?php if( $kullanicicek['kullanici_durum']=='0'){echo 'selected=""';} ?>>Passive</option>
+                          </select>
                         </div>
                       </div>
                                         

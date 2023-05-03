@@ -165,4 +165,28 @@ if(isset($_POST['api_ayar'])){
     exit;
     }
   }
+  if(isset($_POST['kullanici_düzenle'])){
+    $kul=$_POST['kullanici_id'];
+    $güncelle=$db->prepare("UPDATE kullanici SET kullanici_tc=:kullanici_tc,kullanici_adsoyad=:kullanici_adsoyad,kullanici_durum=:kullanici_durum
+    WHERE kullanici_id=$kul
+     ");
+    $kontrol=$güncelle->execute([
+        'kullanici_adsoyad'=>$_POST['kullanici_adsoyad'],
+        'kullanici_tc'=>$_POST['kullanici_tc'],
+        'kullanici_durum'=>$_POST['kullanici_durum']
+        
+     ]);
+
+    if($kontrol){
+     
+      header("Location:../production/kullanıcı-düzenle.php?id=$kul&?durum=ok");
+      
+    }
+    else {
+      header("Location:../production/kullanıcı-düzenle.php?id=$kul&?durum=no");
+      
+    }
+  
+  }
+
 ?>

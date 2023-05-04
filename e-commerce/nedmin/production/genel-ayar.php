@@ -48,7 +48,7 @@
                           <input type="text" id="first-name" name="ayar_title"value="<?php echo $ayarcek['ayar_title'] ?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-
+                             
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description <span class="required">*</span>
                         </label>

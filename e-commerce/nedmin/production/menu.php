@@ -7,7 +7,7 @@ $slect->execute([
  $hakkımızdacek=$slect->fetch(PDO::FETCH_ASSOC); 
 ?>
 <?php  
-   $kullancı=$db->prepare("SELECT * FROM kullanici");
+   $kullancı=$db->prepare("SELECT * FROM menu");
    $kullancı->execute();
 ?>
 <head><script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
@@ -20,7 +20,7 @@ $slect->execute([
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>User List<small>
+                    <h2>Menu List<small>
                       
                      <?php 
                      if(isset($_GET['durum'])){
@@ -32,32 +32,22 @@ $slect->execute([
                         <b style="color:red;">Process unsuccesful</b>
                       <?php } }?>
                     </small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
-                  </div>
+                    <div align="right">
+                    <a href="menu-ekle.php"><button class="btn btn-success btn-xs">ADD NEW</button></a>
+                    </div>
+                </div>
                   <div class="x_content">
 
                   <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>Registration Date</th>
-                          <th>Name Surname</th>
-                          <th>Mail</th>
-                          <th>GSM</th>
+                          <th width=20>Queue No</th>
+                          <th>Menu Name</th>
+                          <th>Menu Url</th>
+                          <th>Menu Queue</th>
+                          <th>Menu Status</th>
                           <th></th>
                           <th></th>
                          
@@ -65,15 +55,26 @@ $slect->execute([
                       </thead>
                       <tbody>
 
-                      <?php
-                      while($kullanıcıcek=$kullancı->fetch(PDO::FETCH_ASSOC)){?>
+                      <?php $say=0;
+                      while($menucek=$kullancı->fetch(PDO::FETCH_ASSOC)){ $say++; ?>
                         <tr>
-                          <td><?php echo $kullanıcıcek['kullanici_zaman']; ?></td>
-                          <td><?php echo $kullanıcıcek['kullanici_adsoyad']; ?></td>
-                          <td><?php echo $kullanıcıcek['kullanici_mail']; ?></td>
-                          <td><?php echo $kullanıcıcek['kullanici_gsm']; ?></td>
-                          <td><center><a href="kullanıcı-düzenle.php?id=<?php echo $kullanıcıcek['kullanici_id']; ?>"><button class="btn btn-primary btn-xs">EDIT</button></a></center></td>
-                          <td><center><a href="../netting/işlem.php?id=<?php echo $kullanıcıcek['kullanici_id'];?>&sil=ok"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
+                            <td><?php echo $say;  ?></td>
+                          <td><?php echo $menucek['menu_ad']; ?></td>
+                          <td><?php echo $menucek['menu_url']; ?></td>
+                          <td><?php echo $menucek['menu_sira']; ?></td>
+                          <td><center><?php 
+                          
+                          if($menucek['menu_durum']==1){?>
+                              <button class="btn btn-success btn-xs">Active</button>
+                         <?php }
+                         else{ ?>
+                            <button class="btn btn-danger btn-xs">Passive</button>
+                                
+                          <?php }  ?>
+                          </center>
+                          </td>
+                          <td><center><a href="menu-düzenle.php?id=<?php echo $menucek['menu_id']; ?>"><button class="btn btn-primary btn-xs">EDIT</button></a></center></td>
+                          <td><center><a href="../netting/işlem.php?id=<?php echo $menucek['menu_id'];?>&sil=ok"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
                           
                         </tr>
                      <?php  } ?>

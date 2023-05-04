@@ -188,5 +188,20 @@ if(isset($_POST['api_ayar'])){
     }
   
   }
+  if(isset($_GET['sil'])){
+
+   if($_GET['sil']=="ok"){
+    $sil=$db->prepare("DELETE FROM kullanici where kullanici_id=:id");     
+    $kontrol=$sil->execute([
+      'id'=>$_GET['id']
+    ]);   
+   if($kontrol){
+    header("Location:../production/kullanıcı.php?sil=ok");
+   }
+   else{
+    header("Location:../production/kullanıcı.php?sil=no");
+   } 
+   }
+  }
 
 ?>

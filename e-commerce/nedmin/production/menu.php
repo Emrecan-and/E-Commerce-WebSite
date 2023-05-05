@@ -74,7 +74,7 @@ $slect->execute([
                           </center>
                           </td>
                           <td><center><a href="menu-düzenle.php?id=<?php echo $menucek['menu_id']; ?>"><button class="btn btn-primary btn-xs">EDIT</button></a></center></td>
-                          <td><center><a href="../netting/işlem.php?id=<?php echo $menucek['menu_id'];?>&sil=ok"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
+                          <td><center><a href="../netting/işlem.php?id=<?php echo $menucek['menu_id'];?>&menu_sil=ok"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
                           
                         </tr>
                      <?php  } ?>

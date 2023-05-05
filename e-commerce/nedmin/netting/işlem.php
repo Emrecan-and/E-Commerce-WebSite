@@ -2,6 +2,7 @@
 ob_start();
 session_start();  
 include 'baglan.php';
+include '../production/function.php';
 if(isset($_POST['genel_ayar'])){
    
   $güncelle=$db->prepare("UPDATE ayar SET ayar_title=:ayar_title, ayar_description=:ayar_description, ayar_keyword=:ayar_keyword,
@@ -203,5 +204,71 @@ if(isset($_POST['api_ayar'])){
    } 
    }
   }
+  if(isset($_POST['menu_düzenle'])){
+    $menu_id=$_POST['menu_id']; 
+    $menu_seourl=seo_friendly_url($_POST['menu_ad']);
 
+    $güncelle=$db->prepare("UPDATE menu SET menu_ad=:menu_ad,menu_detay=:menu_detay,
+    menu_url=:menu_url,menu_sira=:menu_sira,menu_seourl=:menu_seourl,menu_durum=:menu_durum
+    WHERE menu_id=$menu_id
+     ");
+    $kontrol=$güncelle->execute([
+        'menu_ad'=>$_POST['menu_ad'],
+        'menu_detay'=>$_POST['menu_detay'],
+        'menu_url'=>$_POST['menu_url'],
+        'menu_sira'=>$_POST['menu_sira'],
+        'menu_seourl'=>$menu_seourl,
+        'menu_durum'=>$_POST['menu_durum']        
+     ]);
+
+    if($kontrol){
+      header("Location:../production/menu.php?menu_id=$menu_id&?durum=ok");
+      
+    }
+    else {
+      header("Location:../production/menu.php?menu_id=$menu_id&?durum=no");
+      
+    }
+  
+  }
+
+  if(isset($_GET['menu_sil'])){
+
+    if($_GET['menu_sil']=="ok"){
+     $sil=$db->prepare("DELETE FROM menu where menu_id=:id");     
+     $kontrol=$sil->execute([
+       'id'=>$_GET['id']
+     ]);   
+    if($kontrol){
+     header("Location:../production/menu.php?sil=ok");
+    }
+    else{
+     header("Location:../production/menu.php?sil=no");
+    } 
+    }
+   }
+   if(isset($_POST['menukaydet'])){
+   $menu_seourl=seo_friendly_url($_POST['menu_ad']);
+   $güncelle=$db->prepare("INSERT INTO menu SET menu_ad=:menu_ad,menu_detay=:menu_detay,
+   menu_url=:menu_url,menu_sira=:menu_sira,menu_seourl=:menu_seourl,menu_durum=:menu_durum
+    ");
+   $kontrol=$güncelle->execute([
+       'menu_ad'=>$_POST['menu_ad'],
+       'menu_detay'=>$_POST['menu_detay'],
+       'menu_url'=>$_POST['menu_url'],
+       'menu_sira'=>$_POST['menu_sira'],
+       'menu_seourl'=>$menu_seourl,
+       'menu_durum'=>$_POST['menu_durum']        
+    ]);
+
+   if($kontrol){
+     header("Location:../production/menu.php?durum=ok");
+     
+   }
+   else {
+     header("Location:../production/menu.php?durum=no");
+     
+   }
+
+   }
 ?>

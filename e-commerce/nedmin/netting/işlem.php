@@ -271,4 +271,11 @@ if(isset($_POST['api_ayar'])){
    }
 
    }
+
+   if(isset($_POST['logoduzenle'])){
+    
+
+
+   }
+
 ?>

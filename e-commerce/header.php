@@ -1,5 +1,6 @@
 <?php   
 include'nedmin/netting/baglan.php';
+include 'nedmin/production/function.php';
 ?>
 <?php   
 $select=$db->prepare("SELECT * FROM ayar WHERE ayar_id=:ayar_id");
@@ -128,7 +129,19 @@ $select->execute([
 								
 								while($menucek=$menu->fetch(PDO::FETCH_ASSOC)){ ?>
                                   
-								<li><a href="contact.htm"><?php echo $menucek['menu_ad']  ?></a></li>
+								<li><a href="
+								
+								<?php   
+							  	
+                               if(!empty($menucek['menu_url'])){
+                                  echo $menucek['menu_url'];
+							   }
+                                else{
+									echo "sayfa-".seo_friendly_url($menucek['menu_ad']);
+								}
+								?>
+								
+								"><?php echo $menucek['menu_ad']  ?></a></li>
 								<?php  } ?>
 							</ul>
 						</div>

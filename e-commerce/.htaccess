@@ -14,6 +14,7 @@ RewriteRule ^(.*)$ $1.php
 
 #404 hata sayfası yönlendirme kodu
 #ErrorDocument 404 http://www.joyakademi.com
+RewriteRule ^sayfa-([0-9a-zA-Z-_]+) menu-detay.php?sef=$1 [L,QSA]
 
 
 

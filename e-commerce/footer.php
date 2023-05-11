@@ -3,7 +3,7 @@
 			<div class="row">
 				<div class="col-md-4"><!--footer twitter widget-->
 					<div class="title-widget-bg">
-						<div class="title-widget">Twitter Updates</div>
+			         <div class="title-widget">Twitter Updates</div>
 					</div>
 					<ul class="tweets">
 						<li>Check out this great #themeforest item for you

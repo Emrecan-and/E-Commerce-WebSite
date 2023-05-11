@@ -47,7 +47,7 @@ $select->execute([
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 col-md-4 main-logo">
-					<a href="index.php"><img src="images\logo.png" alt="logo" class="logo img-responsive"></a>
+					<a href="index.php"><img width="80" src=<?php echo $ayarcek['ayar_logo'] ?> alt="logo" class="logo img-responsive"></a>
 				</div>
 				<div class="col-md-8">
 					<div class="pushright">
@@ -120,7 +120,7 @@ $select->execute([
 						</div>
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="index-1.htm" class="active">Home</a><div class="curve"></div></li>
+								<li><a href="index.php" class="active">Home</a><div class="curve"></div></li>
 							    <?php 
 								 $menu=$db->prepare("SELECT * FROM menu where menu_durum=:durum order by  menu_sira ASC limit 5");
 								 $menu->execute([

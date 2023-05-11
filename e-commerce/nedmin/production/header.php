@@ -86,6 +86,7 @@ $select->execute([
                 <li><a href="hakkımızda.php"><i class="fa fa-info"></i> About Us  </a></li>
                 <li><a href="kullanıcı.php"><i class="fa fa-user"></i> Users </a></li>
                 <li><a href="menu.php"><i class="fa fa-list"></i> Menu </a></li>
+                <li><a href="slider.php"><i class="fa fa-image"></i> Slider </a></li>
                   <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="genel-ayar.php">General Settings</a></li>

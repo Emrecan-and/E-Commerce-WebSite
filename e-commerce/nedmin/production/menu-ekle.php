@@ -122,7 +122,7 @@ forcePasteAsPlainText: true
 
                       <div class="form-group">
                         <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" name="menukaydet" class="btn btn-success">EDIT</button>
+                          <button type="submit" name="menukaydet" class="btn btn-success">ADD</button>
                         </div>
                       </div>
 

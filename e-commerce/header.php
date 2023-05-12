@@ -195,6 +195,11 @@ $select->execute([
 							<div class="clearfix"></div>
 						</div>
 					</div>
+				<!--	<ul class="small-menu">
+			<li><a href="" class="myacc">My Account</a></li>
+			<li><a href="" class="myshop">Shopping Chart</a></li>
+			<li><a href="" class="mycheck">Checkout</a></li>
+		</ul>  -->
 				</div>
 			</div>
 		</div>

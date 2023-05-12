@@ -44,6 +44,7 @@ $slect->execute([
                       <thead>
                         <tr>
                           <th width=20>Queue No</th>
+                          <th>Slider Image</th>
                           <th>Slider Name</th>
                           <th>Slider Url</th>
                           <th>Slider Queue</th>
@@ -59,8 +60,9 @@ $slect->execute([
                       while($slidercek=$kullancı->fetch(PDO::FETCH_ASSOC)){ $say++; ?>
                         <tr>
                             <td><?php echo $say;  ?></td>
+                           <td><img width="200" src="../../<?php echo $slidercek['slider_resimyol']; ?>" ></td>
                           <td><?php echo $slidercek['slider_ad']; ?></td>
-                          <td><?php echo $slidercek['slider_url']; ?></td>
+                          <td><?php echo $slidercek['slider_link']; ?></td>
                           <td><?php echo $slidercek['slider_sira']; ?></td>
                           <td><center><?php 
                           
@@ -74,7 +76,7 @@ $slect->execute([
                           </center>
                           </td>
                           <td><center><a href="slider-düzenle.php?id=<?php echo $slidercek['slider_id']; ?>"><button class="btn btn-primary btn-xs">EDIT</button></a></center></td>
-                          <td><center><a href="../netting/işlem.php?id=<?php echo $slidercek['slider_id'];?>&slider_sil=ok"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
+                          <td><center><a href="../netting/işlem.php?id=<?php echo $slidercek['slider_id'];?>&slider_sil=ok&img=<?php echo $slidercek['slider_resimyol'];?>"><button class="btn btn-danger btn-xs">DELETE</button></a></center></td>
                           
                         </tr>
                      <?php  } ?>

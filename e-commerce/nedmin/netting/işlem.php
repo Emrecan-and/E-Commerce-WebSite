@@ -295,5 +295,74 @@ if(isset($_POST['api_ayar'])){
     
       }
    }
+    if(isset($_POST['sliderkaydet'])){
+      $uploads_dir="../../dimg/slider";
+      @$tmp_name=$_FILES['slider_resimyol']["tmp_name"];
+      @$name=$_FILES['slider_resimyol']["name"];
+      $benzersizsayi4=rand(20000,30000);
+      $refimgyol=substr($uploads_dir,6)."/". $benzersizsayi4.$name;
+      @move_uploaded_file($tmp_name,"$uploads_dir/$benzersizsayi4$name");
+      $duzenle=$db->prepare("INSERT INTO slider (slider_ad,slider_resimyol,slider_sira,slider_link,slider_durum) VALUES(:ad,:resim,:sira,:link,:durum)");
+      $kontrol=$duzenle->execute([
+        'ad'=>$_POST['slider_ad'],
+        'resim'=>$refimgyol,
+        'sira'=>$_POST['slider_sira'],
+        'link'=>$_POST['slider_link'],
+        'durum'=>$_POST['slider_durum']
+      ]);
+      if($kontrol){
+        header("Location:../production/slider.php?durum=ok");
+    
+      }
+      else{
+        header("Location:../production/slider.php?durum=no");
+    
+      }
+    }
+   if(isset($_POST['slider_düzenle'])){
+    $uploads_dir="../../dimg/slider";
+    @$tmp_name=$_FILES['slider_resimyol']["tmp_name"];
+    @$name=$_FILES['slider_resimyol']["name"];
+    
+    $benzersizsayi4=rand(20000,32000);
+    $refimgyol=substr($uploads_dir,6)."/".$benzersizsayi4.$name;
+    @move_uploaded_file($tmp_name,"$uploads_dir/$benzersizsayi4$name");
+    $slider_id=$_POST['slider_id'];
+    $duzenle=$db->prepare("UPDATE slider SET slider_resimyol=:resim,slider_ad=:ad,slider_sira=:sira,slider_durum=:durum
+     WHERE slider_id=$slider_id");
+    $kontrol=$duzenle->execute([
+        'ad'=>$_POST['slider_ad'],
+        'resim'=>$refimgyol,
+        'sira'=>$_POST['slider_sira'],
+ 
+        'durum'=>$_POST['slider_durum']
+    ]);
+    if($kontrol){
+      $resim_unlink=$_POST['eski_yol'];
+      unlink("../../$resim_unlink");
+      header("Location:../production/slider.php?durum=ok");
+  
+    }
+    else{
+      header("Location:../production/slider.php?durum=no");
+  
+    }      
+   }
+   if(isset($_GET['slider_sil'])){
 
+    if($_GET['slider_sil']=="ok"){
+     $sil=$db->prepare("DELETE FROM slider where slider_id=:id");     
+     $kontrol=$sil->execute([
+       'id'=>$_GET['id']
+     ]);   
+    if($kontrol){
+      $img=$_GET['img'];
+      unlink("../../$img");
+     header("Location:../production/slider.php?sil=ok");
+    }
+    else{
+     header("Location:../production/slider.php?sil=no");
+    } 
+    }
+   }
 ?>  

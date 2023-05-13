@@ -25,7 +25,7 @@ $slect->execute([
 
 			</div>
 			<!--sidebar gelecek-->
-            <?php  include 'sidebar.php'; ?>
+            
 		</div>
 		<div class="spacer"></div>
 	</div>

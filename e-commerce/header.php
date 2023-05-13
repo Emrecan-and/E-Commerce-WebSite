@@ -102,23 +102,7 @@ $select->execute([
 									</div>
 								</div>
 							</div>
-							<div class="srch-wrap">
-								<a href="#" id="srch" class="btn btn-default btn-search"><i class="fa fa-search"></i></a>
-							</div>
-							<div class="srchwrap">
-								<div class="row">
-									<div class="col-md-12">
-										<form class="form-horizontal" role="form">
-											<div class="form-group">
-												<label for="search" class="col-sm-2 control-label">Search</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="search">
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -166,60 +150,11 @@ $select->execute([
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-2 machart">
-						<button id="popcart" class="btn btn-default btn-chart btn-sm "><span class="mychart">Cart</span>|<span class="allprice">$0.00</span></button>
-						<div class="popcart">
-							<table class="table table-condensed popcart-inner">
-								<tbody>
-									<tr>
-										<td>
-										<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-										</td>
-										<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-										<td>1X</td>
-										<td>$138.80</td>
-										<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-									</tr>
-									<tr>
-										<td>
-										<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-										</td>
-										<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-										<td>1X</td>
-										<td>$138.80</td>
-										<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-									</tr>
-									<tr>
-										<td>
-										<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-										</td>
-										<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-										<td>1X</td>
-										<td>$138.80</td>
-										<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-									</tr>
-								</tbody>
-							</table>
-							<span class="sub-tot">Sub-Total : <span>$277.60</span> | <span>Vat (17.5%)</span> : $36.00 </span>
-							<br>
-							<div class="btn-popcart">
-								<a href="checkout.htm" class="btn btn-default btn-red btn-sm">Checkout</a>
-								<a href="cart.htm" class="btn btn-default btn-red btn-sm">More</a>
-							</div>
-							<div class="popcart-tot">
-								<p>
-									Total<br>
-									<span>$313.60</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
+					
 					<?php 
 					if(isset($_SESSION['userkullanici_mail'])){?> 
 					<ul class="small-menu">
-			<li><a href="" class="myacc">My Account</a></li>
-			<li><a href="" class="myshop">Shopping Chart</a></li>
+			<li><a href="" class="myacc"><?php echo $kullanicicek['kullanici_adsoyad'] ?></a></li>
 			<li><a href="logout.php" class="mycheck">Safety LogOut</a></li>
 		</ul>  <?php } ?>
 				</div>

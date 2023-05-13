@@ -46,7 +46,7 @@ $slect->execute([
                           <th width=20>Queue No</th>
                           <th>Slider Image</th>
                           <th>Slider Name</th>
-                          <th>Slider Url</th>
+                          <th>Slider Price</th>
                           <th>Slider Queue</th>
                           <th>Slider Status</th>
                           <th></th>

@@ -73,6 +73,8 @@ $çek->execute([
          <p align="center" class="error-message">Process unsuccesfull..</p>
   <?php  }  ?>
 <br>
+<h3 align="center"><?php echo "FOR GIVING ORDER CALL TO ".$ayarcek['ayar_tel'];?></h3>
+<hr>
   <table align="center">
     <tr>
       <th>Name</th>
@@ -98,8 +100,8 @@ $çek->execute([
 <br>
 <button type="submit" name="comment" class="btn btn-default btn-red btn-sm">Submit Comment</button>
 </form>
+    <br>
     
- 
 
 
 

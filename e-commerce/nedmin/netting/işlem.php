@@ -432,4 +432,29 @@ if(isset($_POST['api_ayar'])){
         header("Location:../../register.php?sorun=yes");
       }
    }
+   if(isset($_POST['comment'])){
+      $img= $_POST['img'];
+       $com=$_POST['comment_text'];
+      if(empty($_POST['comment_text'])){
+          header("Location:../../sipariş.php?img=$img&bos=yes");
+      }
+      else if(strlen($com)>500){
+        header("Location:../../sipariş.php?img=$img&dolu=yes");
+      }
+      else{
+          $ekle=$db->prepare("INSERT INTO comment SET slider_ad=:slider_ad,user_ad=:user_ad,comment_text=:comment_text");         
+          $ekle->execute([
+            'slider_ad'=>$_POST['slider_ad'],
+            'user_ad'=>$_POST['user_ad'],
+            'comment_text'=>$_POST['comment_text']
+          ]);
+          $say=$ekle->rowCount();
+         if($say){
+          header("Location:../../sipariş.php?img=$img&durum=yes");
+         }
+         else{
+          header("Location:../../sipariş.php?img=$img&durum=no");
+         }
+      }
+   }
 ?>  

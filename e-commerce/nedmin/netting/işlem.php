@@ -166,6 +166,28 @@ if(isset($_POST['api_ayar'])){
     exit;
     }
   }
+  if(isset($_POST['kullanicigiris'])){
+    $mail=$_POST['kullanici_mail'];
+    $password=md5($_POST['kullanici_password']);
+    $select=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:kullanici_mail and kullanici_password=:kullanici_password and
+    kullanici_yetki=:kullanici_yetki and kullanici_durum=:kullanici_durum");
+    $select->execute([
+      'kullanici_mail'=>$mail,
+      'kullanici_password'=>$password,
+      'kullanici_yetki'=>1,
+      'kullanici_durum'=>1
+    ]); 
+    $say=$select->rowCount();
+     if($say==1){
+       header("Location:../../");
+       $_SESSION['userkullanici_mail']=$mail;
+       exit;
+     } 
+     else{
+     header("Location:../../?durum=no");
+     exit;
+     }
+   }
   if(isset($_POST['kullanici_düzenle'])){
     $kul=$_POST['kullanici_id'];
     $güncelle=$db->prepare("UPDATE kullanici SET kullanici_tc=:kullanici_tc,kullanici_adsoyad=:kullanici_adsoyad,kullanici_durum=:kullanici_durum
@@ -364,5 +386,50 @@ if(isset($_POST['api_ayar'])){
      header("Location:../production/slider.php?sil=no");
     } 
     }
+   }
+   if(isset($_POST['register'])){
+      $ad=$_POST['kullanici_adsoyad'];
+      $şifre1=$_POST['kullanici_password1'];
+      $şifre2=$_POST['kullanici_password2'];
+      $mail=$_POST['kullanici_mail'];
+      if($şifre1==$şifre2 and filter_var($mail, FILTER_VALIDATE_EMAIL)){
+       if ($şifre1>=6){
+        $s=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+        $s->execute([
+          'mail'=>$mail
+        ]);
+        $say=$s->rowCount();
+        if($say){
+          header("Location:../../register.php?sorun=yes");
+        }
+        else{
+        //SQL COMMAND
+        $select=$db->prepare("INSERT INTO kullanici SET kullanici_adsoyad=:ad,kullanici_password=:sifre,kullanici_mail=:mail,
+        kullanici_yetki=:yetki");
+        $row=$select->execute([
+          'ad'=>$ad,
+          'sifre'=>md5($şifre1),
+          'mail'=>$mail,
+          'yetki'=>1
+        ]);
+        if($row){
+        header("Location:../../index.php?kayit=basarili");}
+        else{
+          header("Location:../../register.php?kayit=yes");
+        }}
+      }
+        else{
+          header("Location:../../register.php?boyut=yes");
+        }
+      }
+      else if($şifre1!==$şifre2 and filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        header("Location:../../register.php?uyum=yes");
+      }
+      else if($şifre1==$şifre2 and filter_var($mail, FILTER_VALIDATE_EMAIL)==false){
+        header("Location:../../register.php?mail=yes");
+      }
+      else{
+        header("Location:../../register.php?sorun=yes");
+      }
    }
 ?>  

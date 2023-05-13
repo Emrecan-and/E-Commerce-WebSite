@@ -17,15 +17,15 @@
 						<div class="inner">
 							<div class="pro-pricetag big-deal">
 								<div class="inner">
-										<span class="oldprice">$31</span>
-										<span>$14</span>
+										<span class="oldprice">$<?php echo rand(22,32);?></span>
+										<span>$<?php echo rand(10,20);?></span>
 										<span class="ondeal">Best Deal</span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="slide-type-1">
-						<img  width="800"  src=<?php echo $slidercek['slider_resimyol']  ?> alt="" class="img-responsive">
+						<img  width="700"  src=<?php echo $slidercek['slider_resimyol']  ?> alt="" class="img-responsive">
 					</div>
 				</div>
 				  <?php } ?>

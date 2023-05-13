@@ -1,4 +1,6 @@
 <?php   
+ob_start();
+session_start();
 include'nedmin/netting/baglan.php';
 include 'nedmin/production/function.php';
 ?>
@@ -8,6 +10,16 @@ $select->execute([
     'ayar_id'=>1
   ]);
  $ayarcek=$select->fetch(PDO::FETCH_ASSOC); 
+?>
+<?php  
+   if(isset($_SESSION['userkullanici_mail'])){
+   $kullancı=$db->prepare("SELECT * FROM kullanici WHERE kullanici_mail=:mail");
+   $kullancı->execute([
+       'mail'=>$_SESSION['userkullanici_mail']
+     ]);
+    $say=$kullancı->rowCount();
+    $kullanicicek=$kullancı->fetch(PDO::FETCH_ASSOC); 
+   }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,24 +64,32 @@ $select->execute([
 				<div class="col-md-8">
 					<div class="pushright">
 						<div class="top">
+							<?php 
+							if(!isset($_SESSION['userkullanici_mail'])){?> 
+							
 							<a href="#" id="reg" class="btn btn-default btn-dark">Login<span>-- Or --</span>Register</a>
+							<?php } else { ?>
+								<a href="#"  class="btn btn-default btn-dark">WELCOME<span>--</span><?php echo $kullanicicek['kullanici_adsoyad'] ?></a> <?php } ?>
 							<div class="regwrap">
-								<div class="row">
+								<div class="r	ow">
 									<div class="col-md-6 regform">
 										<div class="title-widget-bg">
 											<div class="title-widget">Login</div>
 										</div>
-										<form role="form">
+
+										<form action="nedmin/netting/işlem.php" method="POST"role="form">
 											<div class="form-group">
-												<input type="text" class="form-control" id="username" placeholder="Username">
+												<input type="text" class="form-control"name="kullanici_mail" id="username" placeholder="Username(Mail Adress)">
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control" id="password" placeholder="password">
+												<input type="password" name="kullanici_password"class="form-control" id="password" placeholder="password">
 											</div>
 											<div class="form-group">
-												<button class="btn btn-default btn-red btn-sm">Sign In</button>
+												<button type="submit" name="kullanicigiris"class="btn btn-default btn-red btn-sm">Sign In</button>
 											</div>
 										</form>
+
+
 									</div>
 									<div class="col-md-6">
 										<div class="title-widget-bg">
@@ -78,7 +98,7 @@ $select->execute([
 										<p>
 											New User? By creating an account you be able to shop faster, be up to date on an order's status...
 										</p>
-										<button class="btn btn-default btn-yellow">Register Now</button>
+										<a href="register.php"><button class="btn btn-default btn-yellow">Register Now</button></a>
 									</div>
 								</div>
 							</div>
@@ -195,11 +215,13 @@ $select->execute([
 							<div class="clearfix"></div>
 						</div>
 					</div>
-				<!--	<ul class="small-menu">
+					<?php 
+					if(isset($_SESSION['userkullanici_mail'])){?> 
+					<ul class="small-menu">
 			<li><a href="" class="myacc">My Account</a></li>
 			<li><a href="" class="myshop">Shopping Chart</a></li>
-			<li><a href="" class="mycheck">Checkout</a></li>
-		</ul>  -->
+			<li><a href="logout.php" class="mycheck">Safety LogOut</a></li>
+		</ul>  <?php } ?>
 				</div>
 			</div>
 		</div>

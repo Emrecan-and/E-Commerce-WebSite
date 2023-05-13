@@ -42,14 +42,14 @@
 </style>
   
 <?php
-             $slider=$db->prepare("SELECT * FROM slider WHERE slider_sira=:sira");
+             $slider=$db->prepare("SELECT * FROM slider  WHERE slider_sira=:sira ");
              $slider->execute([
                 'sira'=>$_GET['img']
              ]);   
              $slidercek=$slider->fetch(PDO::FETCH_ASSOC);
 
                
-$çek=$db->prepare("SELECT *  FROM comment WHERE slider_ad=:ad");
+$çek=$db->prepare("SELECT *  FROM comment WHERE slider_ad=:ad ORDER BY dat DESC");
 $çek->execute([
     'ad'=>$slidercek['slider_ad']
 ]);
